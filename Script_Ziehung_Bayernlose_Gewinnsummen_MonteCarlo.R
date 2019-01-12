@@ -1,5 +1,5 @@
 #ggplot & dplyr verfügbar machen über tidyverse
-library("tidyverse")
+library(tidyverse)
 
 #Lospool definieren inkl. 0
 LosPool<-c(0,2,4,10,20,100,1000,10000,300000)
@@ -25,5 +25,6 @@ MonteCarloSim<-replicate(nZiehungen,
   Gewinnsumme<-sum(X)
   }
   )
-hist(MonteCarloSim)
+
+DFMonteCarloSim<-data.frame(Gewinn=as.numeric(MonteCarloSim))
 

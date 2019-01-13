@@ -27,7 +27,7 @@ MonteCarloSim<-replicate(nZiehungen,
   )
 
 DFMonteCarloSim<-data.frame(Gewinn=as.numeric(MonteCarloSim))
-ggplot(DFMonteCarloSim,aes(x=Gewinn))+geom_histogram(binwidth = 0.005)+scale_x_continuous(trans="log10")+scale_y_continuous(trans="log10")
+ggplot(DFMonteCarloSim,aes(x=Gewinn))+geom_histogram(binwidth = 0.005)+scale_x_continuous(trans="log10")+scale_y_continuous(trans="log10")+geom_vline(aes(xintercept = mean(MonteCarloSim)), color="blue")+geom_vline(aes(xintercept = (mean(MonteCarloSim)+2*sd(MonteCarloSim))), color="green")+geom_vline(aes(xintercept = (mean(MonteCarloSim)-2*sd(MonteCarloSim))), color="green")
 
 #Mittelwert, etc. berechnen
 mean(MonteCarloSim)

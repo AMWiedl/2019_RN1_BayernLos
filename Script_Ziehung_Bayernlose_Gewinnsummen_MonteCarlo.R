@@ -13,7 +13,7 @@ ProbLose_mit0<-c((1-GesamtSofortGewProb),(1/5.88),(1/20),(1/50),(1/200),(1/1000)
 Lose<-1000
 
 #Anzahl Ziehungen definieren
-nZiehungen<-750
+nZiehungen<-500000
 
 #Start festlegen für Reproduzierbarkeit der Ergebnisse
 set.seed(1)
@@ -27,4 +27,10 @@ MonteCarloSim<-replicate(nZiehungen,
   )
 
 DFMonteCarloSim<-data.frame(Gewinn=as.numeric(MonteCarloSim))
+ggplot(DFMonteCarloSim,aes(x=Gewinn))+geom_histogram(binwidth = 0.005)+scale_x_continuous(trans="log10")+scale_y_continuous(trans="log10")
 
+#Mittelwert, etc. berechnen
+mean(MonteCarloSim)
+sd(MonteCarloSim)
+max(MonteCarloSim)
+min(MonteCarloSim)

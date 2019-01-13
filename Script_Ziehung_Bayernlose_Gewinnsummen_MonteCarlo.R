@@ -13,7 +13,7 @@ ProbLose_mit0<-c((1-GesamtSofortGewProb),(1/5.88),(1/20),(1/50),(1/200),(1/1000)
 Lose<-1000
 
 #Anzahl Ziehungen definieren
-nZiehungen<-500000
+nZiehungen<-10000
 
 #Start festlegen für Reproduzierbarkeit der Ergebnisse
 set.seed(1)
@@ -26,11 +26,26 @@ MonteCarloSim<-replicate(nZiehungen,
   }
   )
 
-DFMonteCarloSim<-data.frame(Gewinn=as.numeric(MonteCarloSim))
-ggplot(DFMonteCarloSim,aes(x=Gewinn))+geom_histogram(binwidth = 0.005)+scale_x_continuous(trans="log10")+scale_y_continuous(trans="log10")+geom_vline(aes(xintercept = mean(MonteCarloSim)), color="blue")+geom_vline(aes(xintercept = (mean(MonteCarloSim)+2*sd(MonteCarloSim))), color="green")+geom_vline(aes(xintercept = (mean(MonteCarloSim)-2*sd(MonteCarloSim))), color="green")
-
 #Mittelwert, etc. berechnen
-mean(MonteCarloSim)
-sd(MonteCarloSim)
-max(MonteCarloSim)
-min(MonteCarloSim)
+Mittelwert<-mean(MonteCarloSim)
+Standardabweichung<-sd(MonteCarloSim)
+Maximum<-max(MonteCarloSim)
+Minimum<-min(MonteCarloSim)
+Grenze95Pro<-Mittelwert+1.645*Standardabweichung
+
+Mittelwert
+Standardabweichung
+Minimum
+Maximum
+Grenze95Pro
+
+#Verhindern, dass Achsen auf "scientific" Belabelung umgestellt wird
+options(scipen=5) 
+
+
+DFMonteCarloSim<-data.frame(Gewinn=as.numeric(MonteCarloSim))
+ggplot(DFMonteCarloSim,aes(x=Gewinn))+geom_histogram(binwidth = 0.005)+scale_x_continuous(trans="log10")+
+  scale_y_continuous(trans="log10")+geom_vline(aes(xintercept = Mittelwert), color="blue")+
+  geom_vline(aes(xintercept = Grenze95Pro), color="green")
+
+

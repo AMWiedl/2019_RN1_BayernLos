@@ -10,10 +10,10 @@ GesamtSofortGewProb<-(sum(ProbLose_ohne0))
 ProbLose_mit0<-c((1-GesamtSofortGewProb),(1/5.88),(1/20),(1/50),(1/200),(1/1000),(1/100000),(1/1666666.67),(1/5000000))
 
 #Anzahl Lose je Ziehung definieren
-Lose<-1000
+Lose<-500
 
 #Anzahl Ziehungen definieren
-nZiehungen<-10000
+nZiehungen<-1000000
 
 #Start festlegen für Reproduzierbarkeit der Ergebnisse
 set.seed(1)
@@ -44,7 +44,7 @@ options(scipen=5)
 
 
 DFMonteCarloSim<-data.frame(Gewinn=as.numeric(MonteCarloSim))
-ggplot(DFMonteCarloSim,aes(x=Gewinn))+geom_histogram(binwidth = 0.005)+scale_x_continuous(trans="log10")+
+Plot1_Gewinnsummen<-ggplot(DFMonteCarloSim,aes(x=Gewinn))+geom_histogram(binwidth = 0.005)+scale_x_continuous(trans="log10")+
   scale_y_continuous(trans="log10")+geom_vline(aes(xintercept = Mittelwert), color="blue")+
   geom_vline(aes(xintercept = Grenze95Pro), color="green")
 

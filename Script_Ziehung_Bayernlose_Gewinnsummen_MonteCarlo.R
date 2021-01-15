@@ -13,7 +13,7 @@ ProbLose_mit0<-c((1-GesamtSofortGewProb),(1/5.88),(1/20),(1/50),(1/200),(1/1000)
 Lose<-500
 
 #Anzahl Ziehungen definieren
-nZiehungen<-1000000
+nZiehungen<-5000000
 
 #Start festlegen für Reproduzierbarkeit der Ergebnisse
 set.seed(1)
